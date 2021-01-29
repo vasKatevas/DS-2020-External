@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Register</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function(){setTimeout(hideURLbar,0);},false);function hideURLbar(){window.scrollTo(0,1);}</script>
+<link href="{% static 'css/style1.css' %}" rel="stylesheet" type="text/css" media="all" />
+</head>
+<body>
+	<!-- main -->
+	<div class="main-w3layouts wrapper">
+		<h1>Application</h1>
+		<div class="main-agileinfo">
+			<div class="agileits-top">
+				<form action="apply" method="post">
+                    {% csrf_token %}
+					<input class="text" type="text" name="parent_first_name" placeholder="Ονομα γονέα" required><br>
+					<input class="text" type="text" name="parent_last_name" placeholder="Επώνυμο γονέα" required><br>
+					<input class="text" type="number" name="income" placeholder="Ετήσιο εισόδημα" required><br>
+					<input class="text" type="text" name="child_first_name" placeholder="Ονομα παιδιού" required><br>
+					<input class="text" type="text" name="child_last_name" placeholder="Επώνυμο παιδιού" required><br>
+					<input class="text" type="number" name="age" placeholder="Ηλικία παιδιού" required><br>
+					<input type="submit" value="APPLY">
+				</form>
+			</div>
+		</div>
+		<h1>{{lol}}</h1>
+		<div class="colorlibcopy-agile">
+			<p>© 2018 Colorlib Signup Form. All rights reserved | Design by <a href="https://colorlib.com/" target="_blank">Colorlib</a></p>
+		</div>
+		<ul class="colorlib-bubbles">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+</body>
+</html>
