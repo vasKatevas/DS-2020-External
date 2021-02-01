@@ -15,5 +15,5 @@ AM: it21666
  - uuid
 
 ## Execution
-    python3 manage.py
+    python3 manage.py runserver
 
