@@ -74,15 +74,14 @@ def applyform(request):
         child_last_name=request.POST['child_last_name']
         age=int(request.POST['age'])
 
-
-        url="http://localhost:8080/backSystem/api/applications"
+        url="http://localhost:8080/applications"
         data={
             "username":principal,
-            "parent_first_name":parent_first_name,
-            "parent_last_name":parent_last_name,
+            "parentFirstName":parent_first_name,
+            "parentLastName":parent_last_name,
             "income":int(income),
-            "child_first_name":child_first_name,
-            "child_last_name":child_last_name,
+            "childFirstName":child_first_name,
+            "childLastName":child_last_name,
             "age":int(age)
         }
 
@@ -95,7 +94,7 @@ def applyform(request):
         }
 
         with session() as c:
-            c.post("http://localhost:8080/backSystem/authUser", headers=headers, data=loginData)
+            c.post("http://localhost:8080/authUser", headers=headers, data=loginData)
             response = c.post(url, data=data)
             print(response)
         return redirect('/')
