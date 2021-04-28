@@ -1,8 +1,11 @@
 from pathlib import Path
 import os
+import environ
 
+env = environ.Env()
+environ.Env.read_env()
 BASE_DIR=Path(__file__).resolve().parent.parent
-SECRET_KEY='u8@0#9)sc9j=)0_nf(x%(0sz#daqv_rk%!^d%&*uyt5mp%@&v-'
+SECRET_KEY= env('SECRET_KEY')
 DEBUG=True
 ALLOWED_HOSTS=[]
 INSTALLED_APPS=[
@@ -40,10 +43,11 @@ TEMPLATES=[{
 ]
 WSGI_APPLICATION='kinder.wsgi.application'
 DATABASES={
-    'default':{
-        'ENGINE':'django.db.backends.sqlite3',
-        'NAME':BASE_DIR/'db.sqlite3',
-    }
+    # read os.environ['DATABASE_URL'] and raises ImproperlyConfigured exception if not found
+    'default': env.db(),
+    # read os.environ['SQLITE_URL']
+    'extra': env.db('SQLITE_URL', default='sqlite:///.db.sqlite3')
+
 }
 AUTH_PASSWORD_VALIDATORS=[{
         'NAME':'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
