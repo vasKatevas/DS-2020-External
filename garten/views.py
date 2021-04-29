@@ -5,7 +5,7 @@ from garten.models import *
 import requests
 from requests import session
 import uuid
-
+from django.conf import settings as garten_settings
 
 def index(request):
     return render(request,'index.html')
@@ -62,7 +62,7 @@ def logout(request):
 def applyform(request):
 
 
-
+    api_url= garten_settings.GARTEN_POST_API
 
 
     if(request.method=='POST'):
@@ -74,7 +74,7 @@ def applyform(request):
         child_last_name=request.POST['child_last_name']
         age=int(request.POST['age'])
 
-        url="http://localhost:8080/applications"
+        url= api_url+"/applications"
         data={
             "username":principal,
             "parentFirstName":parent_first_name,
@@ -94,7 +94,7 @@ def applyform(request):
         }
 
         with session() as c:
-            c.post("http://localhost:8080/authUser", headers=headers, data=loginData)
+            c.post(api_url+"/authUser", headers=headers, data=loginData)
             response = c.post(url, data=data)
             print(response)
         return redirect('/')
