@@ -20,9 +20,14 @@ def about(request):
     return render(request,'about.html')
 
 def application(request):
-    return render(request,'application.html')
+    if request.user.is_authenticated:
+        return render(request,'application.html')
+    else:
+        return render(request,'login.html')
+
 
 def registerform(request):
+
     if(request.method=='POST'):
        username=request.POST['username']
        email=request.POST['email']
@@ -65,38 +70,42 @@ def applyform(request):
     api_url= garten_settings.GARTEN_POST_API
 
 
-    if(request.method=='POST'):
-        principal=request.user.username
-        parent_first_name=request.POST['parent_first_name']
-        parent_last_name=request.POST['parent_last_name']
-        income=int(request.POST['income'])
-        child_first_name=request.POST['child_first_name']
-        child_last_name=request.POST['child_last_name']
-        age=int(request.POST['age'])
+    if request.user.is_authenticated:
 
-        url= api_url+"/applications"
-        data={
-            "username":principal,
-            "parentFirstName":parent_first_name,
-            "parentLastName":parent_last_name,
-            "income":int(income),
-            "childFirstName":child_first_name,
-            "childLastName":child_last_name,
-            "age":int(age)
-        }
+        if(request.method=='POST'):
+            principal=request.user.username
+            parent_first_name=request.POST['parent_first_name']
+            parent_last_name=request.POST['parent_last_name']
+            income=int(request.POST['income'])
+            child_first_name=request.POST['child_first_name']
+            child_last_name=request.POST['child_last_name']
+            age=int(request.POST['age'])
 
-        cookie=str(uuid.uuid4())
-        loginData='username=external&password=pass123'
-        headers = {
-            'Authorization': 'Basic YWRtaW46MjU0MjAwMA==',
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Cookie': 'JSESSIONID='+cookie
-        }
+            url= api_url+"/applications"
+            data={
+                "username":principal,
+                "parentFirstName":parent_first_name,
+                "parentLastName":parent_last_name,
+                "income":int(income),
+                "childFirstName":child_first_name,
+                "childLastName":child_last_name,
+                "age":int(age)
+            }
 
-        with session() as c:
-            c.post(api_url+"/authUser", headers=headers, data=loginData)
-            response = c.post(url, data=data)
-            print(response)
-        return redirect('/')
+            cookie=str(uuid.uuid4())
+            loginData='username=external&password=pass123'
+            headers = {
+                'Authorization': 'Basic YWRtaW46MjU0MjAwMA==',
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cookie': 'JSESSIONID='+cookie
+            }
+
+            with session() as c:
+                c.post(api_url+"/authUser", headers=headers, data=loginData)
+                response = c.post(url, data=data)
+                print(response)
+                return redirect('/')
+        else:
+                return redirect('/')
     else:
-        return redirect('/')
+        return redirect('login.html')

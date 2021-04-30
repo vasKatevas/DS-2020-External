@@ -17,7 +17,7 @@ cp kinder/.env.example kinder/.env
 edit kinder/.env file to define
 ```vim
 SECRET_KEY='test123'
-DATABASE_URL=sqlite:///./db.sqlite3
+DATABASE_URL=mysql://djangouser:p@sSword123@localhost:3306/kindergartenExternal
 INTERNAL_SYSTEM_IP='http://localhost:8080'
 ```
 # run development server
