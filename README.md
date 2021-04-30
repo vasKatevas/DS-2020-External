@@ -20,6 +20,13 @@ SECRET_KEY='test123'
 DATABASE_URL=mysql://djangouser:p@sSword123@localhost:3306/kindergartenExternal
 INTERNAL_SYSTEM_IP='http://localhost:8080'
 ```
-# run development server
+# Run test
+(requires [SpringBoot project](https://github.com/vasKatevas/springBoot))
+```bash
+python manage.py test
+```
+
+# Run development server
 ```bash
 python manage.py runserver
+```
