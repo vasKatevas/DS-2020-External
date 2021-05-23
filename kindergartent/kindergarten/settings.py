@@ -7,7 +7,7 @@ environ.Env.read_env()
 BASE_DIR=Path(__file__).resolve().parent.parent
 SECRET_KEY= env('SECRET_KEY')
 DEBUG=True
-ALLOWED_HOSTS=[]
+ALLOWED_HOSTS=['172.25.0.2', '127.0.0.1', 'localhost']
 GARTEN_POST_API=env('INTERNAL_SYSTEM_IP')
 INSTALLED_APPS=[
     'garten.apps.GartenConfig',
@@ -27,7 +27,7 @@ MIDDLEWARE=[
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-ROOT_URLCONF='kinder.urls'
+ROOT_URLCONF='kindergarten.urls'
 TEMPLATES=[{
         'BACKEND':'django.template.backends.django.DjangoTemplates',
         'DIRS':[os.path.join(BASE_DIR,'templates')],
@@ -42,7 +42,7 @@ TEMPLATES=[{
         },
     },
 ]
-WSGI_APPLICATION='kinder.wsgi.application'
+WSGI_APPLICATION='kindergarten.wsgi.application'
 DATABASES={
     # read os.environ['DATABASE_URL'] and raises ImproperlyConfigured exception if not found
     'default': env.db(),
