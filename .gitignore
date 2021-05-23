@@ -7,7 +7,7 @@ myvenv/
 *.log
 *.pot
 *.pyc
-garten/__pycache__/
-kinder/__pycache__
+kindergartent/garten/__pycache__/
+kindergartent/kindergarten/__pycache__/
 db.sqlite3
 media
